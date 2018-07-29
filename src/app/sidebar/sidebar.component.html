@@ -1,0 +1,17 @@
+<mat-card class="sideMat">
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let item of _myService.Stocks" [shAttachMenu]="menu" [shMenuData]="item" (click)="selectSymbol(item)">
+      <h4 mat-line> {{item}}</h4>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+
+  </mat-list>
+</mat-card>
+<sh-context-menu #menu>
+
+  <ng-template *ngFor="let data of items" let-item shContextMenuItem>
+    <div (click)="onClick(data.label,item)">
+      {{data.label}}
+    </div>
+  </ng-template>
+</sh-context-menu>

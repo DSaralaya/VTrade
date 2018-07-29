@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/cdk/overlay-prebuilt.css";
+.mat-form-field {
+  width: 100%;
+}
+
+body {
+  margin: 0px;
+}
+
+.header-title {
+  width: 130px;
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+.searchBox {
+  width: 400px;
+  height: 40px;
+  font-size: 16px;
+  margin-left: 20px;
+  padding-left: 30px;
+  border: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 170px;
+  color: #636060c2;
+  top: 23px;
+}
+
+.sideMat {
+  margin-left: -20px;
+}
+
+#technical-analysis {
+  margin-top: 20px;
+}
+
+#technical-analysis div {
+  margin: 0px !important;
+}
+
+.mat-radio-label {
+  padding-left: 20px;
+}
+
+app-orderbook {
+  width: 100%;
+  margin-top: 50px;
+}

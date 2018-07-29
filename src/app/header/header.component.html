@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="header-title">V-Trade</span>
+    <span>
+      <div>
+        <input type="text" placeholder="search stock" class="searchBox" [formControl]="searchTerm" [matAutocomplete]="auto">
+        <i class="fa fa-search search-icon" aria-hidden="true"></i>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='Add($event.option.value)'>
+          <mat-option *ngFor="let item of searchResult" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
