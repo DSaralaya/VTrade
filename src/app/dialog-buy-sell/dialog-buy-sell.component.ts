@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { SharedService } from '../service/shared.service';
@@ -20,12 +20,15 @@ export interface DialogData {
 })
 export class DialogBuySellComponent {
 	tradeTypes = [ 'MIS', 'CNC' ];
+	order: any = {};
 	constructor(public dialogRef: MatDialogRef<SidebarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private shared: SharedService) {}
+
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
 	buyClick(): void {
 		this.shared.orderBook.push(this.data);
+		console.log(this.shared.orderBook);
 		this.dialogRef.close();
 	}
 }

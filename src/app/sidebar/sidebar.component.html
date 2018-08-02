@@ -1,7 +1,7 @@
 <mat-card class="sideMat">
   <mat-list role="list">
     <mat-list-item role="listitem" *ngFor="let item of _myService.Stocks" [shAttachMenu]="menu" [shMenuData]="item" (click)="selectSymbol(item)">
-      <h4 mat-line> {{item}}</h4>
+      <h4 mat-line> {{item.LastTradedPrice}} {{item.CompanyKey}}</h4>
       <mat-divider></mat-divider>
     </mat-list-item>
 

@@ -1,8 +1,10 @@
-<h1 mat-dialog-title>{{data.action}} {{data.stockName}}</h1>
+<h1 mat-dialog-title>{{data.Action}} {{data.CompanyKey}}
+  <small> 1*{{data.LastTradedPrice}}</small>
+</h1>
 <div mat-dialog-content>
   <div class="row">
     <div class="col-sm-12">
-      <mat-radio-group [(ngModel)]="data.tradeType">
+      <mat-radio-group [(ngModel)]="data.TradeType">
         <mat-radio-button *ngFor="let season of tradeTypes" [value]="season">
           {{season}}
         </mat-radio-button>
@@ -11,23 +13,19 @@
 
     <div class="col-sm-4">
       <mat-form-field class="example-full-width">
-        <input type="number" matInput placeholder="Qty" [(ngModel)]="data.quantity">
+        <input type="number" matInput placeholder="Qty" [(ngModel)]="data.Quantity">
       </mat-form-field>
     </div>
     <div class="col-sm-4">
       <mat-form-field>
-        <input type="number" matInput placeholder="Price" [(ngModel)]="data.price">
+        <input type="number" matInput placeholder="Price" [(ngModel)]="data.LimitPrice">
       </mat-form-field>
     </div>
-    <div class="col-sm-4">
-      <mat-form-field>
-        <input type="number" matInput placeholder="Trigger Price" [(ngModel)]="data.triggerPrice">
-      </mat-form-field>
-    </div>
+
 
   </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="{{data.action=='Buy'?'primary':'warn'}}" (click)="buyClick()">{{data.action}}</button>
+  <button mat-raised-button color="{{data.action=='Buy'?'primary':'warn'}}" (click)="buyClick()">{{data.Action}}</button>
   <button mat-raised-button (click)="onNoClick()">cancel</button>
 </div>

@@ -20,6 +20,8 @@ export class HeaderComponent {
 		});
 	}
 	Add(item) {
-		this._myService.Stocks.push(item);
+		this._myService.selectedSymbol = item.split(':')[1];
+		console.log(this._myService.selectedSymbol);
+		this.service.get_quote();
 	}
 }

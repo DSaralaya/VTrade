@@ -8,4 +8,8 @@ import { SharedService } from '../service/shared.service';
 })
 export class OrderbookComponent {
 	constructor(private shared: SharedService) {}
+
+	getpl(num1, num2) {
+		return parseFloat(num1) - parseFloat(num2);
+	}
 }

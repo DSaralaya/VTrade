@@ -19,9 +19,12 @@ export class SidebarComponent {
 	}
 
 	onClick(action, stock) {
+		stock.Action = action;
+		stock.LimitPrice = stock.LastTradedPrice;
+		stock.LTP = stock.LastTradedPrice;
 		let dialogRef = this.dialog.open(DialogBuySellComponent, {
 			width: '600px',
-			data: { action: action, stockName: stock.split(':')[0], stockCode: stock.split(':')[1] }
+			data: stock
 		});
 	}
 }

@@ -4,16 +4,18 @@
       <th>Product</th>
       <th>Name</th>
       <th>Qty</th>
+      <th>Price</th>
       <th>LTP</th>
       <th>P&L</th>
     </thead>
     <tbody>
       <tr *ngFor="let item of shared.orderBook">
-        <td>{{item.tradeType}}</td>
-        <td>{{item.stockName}}</td>
-        <td>{{item.quantity}}</td>
-        <td>0</td>
-        <td>0</td>
+        <td>{{item.TradeType}}</td>
+        <td>{{item.CompanyKey}}</td>
+        <td>{{item.Quantity}}</td>
+        <td>{{item.LTP}}</td>
+        <td>{{item.LastTradedPrice}}</td>
+        <td>{{ getpl(item.LastTradedPrice,item.LTP)}}</td>
       </tr>
     </tbody>
   </table>
