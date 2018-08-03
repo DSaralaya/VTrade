@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatListModule, MatCardModule, MatTableModule, MatToolbarModule, MatDialogModule, MatButtonModule, MatRadioModule } from '@angular/material';
+import { MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatListModule, MatCardModule, MatTableModule, MatToolbarModule, MatDialogModule, MatButtonModule, MatRadioModule, MatTabsModule } from '@angular/material';
 import { HttpModule } from '@angular/http';
 import { AppService } from './AppService';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -15,7 +15,25 @@ import { DialogBuySellComponent } from './dialog-buy-sell/dialog-buy-sell.compon
 
 @NgModule({
 	declarations: [ AppComponent, SidebarComponent, HeaderComponent, OrderbookComponent, ChartComponent, DialogBuySellComponent ],
-	imports: [ BrowserModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule, HttpModule, MatAutocompleteModule, MatFormFieldModule, MatInputModule, MatListModule, MatCardModule, MatTableModule, MatToolbarModule, MatDialogModule, MatButtonModule, ShContextMenuModule, MatRadioModule ],
+	imports: [
+		BrowserModule,
+		BrowserAnimationsModule,
+		FormsModule,
+		ReactiveFormsModule,
+		HttpModule,
+		MatAutocompleteModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatListModule,
+		MatCardModule,
+		MatTableModule,
+		MatToolbarModule,
+		MatDialogModule,
+		MatButtonModule,
+		MatTabsModule,
+		ShContextMenuModule,
+		MatRadioModule
+	],
 	providers: [ AppService ],
 	bootstrap: [ AppComponent ],
 	entryComponents: [ DialogBuySellComponent ]

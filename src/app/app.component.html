@@ -5,11 +5,15 @@
       <app-sidebar></app-sidebar>
     </div>
     <div class="col-sm-10">
-      <app-orderbook></app-orderbook>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <app-chart></app-chart>
+      <mat-tab-group>
+        <mat-tab label="Chart">
+          <app-chart></app-chart>
+        </mat-tab>
+        <mat-tab label="Holding">
+          <app-orderbook></app-orderbook>
+        </mat-tab>
+
+      </mat-tab-group>
+
     </div>
   </div>

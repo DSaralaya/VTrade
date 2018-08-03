@@ -15,6 +15,8 @@ export class ChartComponent {
 			height: 610,
 			symbol: 'NSE:' + symbol,
 			timezone: 'Asia/Kolkata',
+			has_intraday: true,
+			supported_resolutions: [ '1', '3', '5', '15', '30', '60', '120', '240', 'D' ],
 			theme: 'Light',
 			interval: '60',
 			style: '1',

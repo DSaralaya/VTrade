@@ -31,15 +31,32 @@ export class AppService {
 		});
 	}
 
-	multi_quote() {
+	watchlist_quote() {
 		var lst = '';
 		for (let item of this._myService.Stocks) {
 			lst += '|' + item.CompanyKey;
 		}
-		lst = lst.substring(1);
 		this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
 			var result = JSON.parse(res['_body'])[1];
 			for (let item of this._myService.Stocks) {
+				var fil = result.filter(function(t) {
+					return t['CompanyKey'] == item.CompanyKey;
+				});
+				if (fil.length > 0) {
+					item = this.AssginQuotes(item, fil[0]);
+				}
+			}
+		});
+	}
+
+	orderbook_quote() {
+		var lst = '';
+		for (let item of this._myService.orderBook) {
+			lst += '|' + item.CompanyKey;
+		}
+		this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
+			var result = JSON.parse(res['_body'])[1];
+			for (let item of this._myService.orderBook) {
 				var fil = result.filter(function(t) {
 					return t['CompanyKey'] == item.CompanyKey;
 				});

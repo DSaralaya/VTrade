@@ -15,7 +15,7 @@ export class SidebarComponent {
 	constructor(public _myService: SharedService, private chart: ChartComponent, public dialog: MatDialog) {}
 
 	selectSymbol(item) {
-		this.chart.loadchart(item.split(':')[1]);
+		this.chart.loadchart(item['CompanyKey']);
 	}
 
 	onClick(action, stock) {
