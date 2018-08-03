@@ -1,19 +1,2 @@
 <app-header></app-header>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-2">
-      <app-sidebar></app-sidebar>
-    </div>
-    <div class="col-sm-10">
-      <mat-tab-group>
-        <mat-tab label="Chart">
-          <app-chart></app-chart>
-        </mat-tab>
-        <mat-tab label="Holding">
-          <app-orderbook></app-orderbook>
-        </mat-tab>
-
-      </mat-tab-group>
-
-    </div>
-  </div>
+<router-outlet></router-outlet>

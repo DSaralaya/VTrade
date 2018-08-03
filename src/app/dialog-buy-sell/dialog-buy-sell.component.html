@@ -3,9 +3,16 @@
 </h1>
 <div mat-dialog-content>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <mat-radio-group [(ngModel)]="data.TradeType">
         <mat-radio-button *ngFor="let season of tradeTypes" [value]="season">
+          {{season}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="col-sm-6">
+      <mat-radio-group [(ngModel)]="data.TradeOption">
+        <mat-radio-button *ngFor="let season of tradeOption" [value]="season">
           {{season}}
         </mat-radio-button>
       </mat-radio-group>
@@ -19,6 +26,17 @@
     <div class="col-sm-4">
       <mat-form-field>
         <input type="number" matInput placeholder="Price" [(ngModel)]="data.LimitPrice">
+      </mat-form-field>
+    </div>
+
+    <div class="col-sm-4" *ngIf="data.TradeType=='MIS'">
+      <mat-form-field>
+        <input type="number" matInput placeholder="Target" [(ngModel)]="data.Target">
+      </mat-form-field>
+    </div>
+    <div class="col-sm-4"  *ngIf="data.TradeType=='MIS'">
+      <mat-form-field>
+        <input type="number" matInput placeholder="Stoploss" [(ngModel)]="data.Stoploss">
       </mat-form-field>
     </div>
 

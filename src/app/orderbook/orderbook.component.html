@@ -6,17 +6,81 @@
       <th>Qty</th>
       <th>Price</th>
       <th>LTP</th>
+      <th class="col">Target</th>
+      <th class="col">Stoploss</th>
       <th>P&L</th>
+      <th class="colbutton">Action</th>
     </thead>
     <tbody>
-      <tr *ngFor="let item of shared.orderBook">
+      <tr *ngFor="let item of shared.orderBook;let i = index">
         <td>{{item.TradeType}}</td>
         <td>{{item.CompanyKey}}</td>
         <td>{{item.Quantity}}</td>
         <td>{{item.LTP}}</td>
         <td>{{item.LastTradedPrice}}</td>
-        <td>{{ getpl(item.LastTradedPrice,item.LTP)}}</td>
+        <td class="col">
+          <span *ngIf="!item.isEditable">{{item.Target}}</span>
+          <mat-form-field *ngIf="item.isEditable">
+            <input type="text" matInput placeholder="Target" [(ngModel)]="item.Target">
+          </mat-form-field>
+        </td>
+        <td class="col">
+           <span *ngIf="!item.isEditable">{{item.Stoploss}}</span>
+          <mat-form-field *ngIf="item.isEditable">
+            <input type="text" matInput placeholder="StopLoss" [(ngModel)]="item.Stoploss">
+          </mat-form-field>
+        </td>
+        <td>{{ getpl(item.Quantity,item.LastTradedPrice,item.LTP)}}</td>
+        <td class="colbutton">
+          <button (click)="exit(i)" *ngIf="!item.isEditable" mat-flat-button class="mat-flat-button mat-warn">Exit</button>
+          <button *ngIf="!item.isEditable" (click)="item.isEditable=!item.isEditable" mat-flat-button class="mat-raised-button mat-primary">Modify</button>
+          <button *ngIf="item.isEditable" (click)="item.isEditable=!item.isEditable" mat-flat-button class="mat-flat-button mat-accent">Done</button>
+        </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7"></td>
+        <td> Total:
+          <b>{{total}}</b>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <hr>
+  <table class="table" *ngIf="shared.exitedBook.length>0">
+    <thead>
+      <th>Product</th>
+      <th>Name</th>
+      <th>Qty</th>
+      <th>Price</th>
+      <th>LTP</th>
+      <th>Target</th>
+      <th>Stoploss</th>
+      <th>P&L</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of shared.exitedBook;let i = index">
+        <td>{{item.TradeType}}</td>
+        <td>{{item.CompanyKey}}</td>
+        <td>{{item.Quantity}}</td>
+        <td>{{item.LTP}}</td>
+        <td>{{item.LastTradedPrice}}</td>
+        <td>{{item.Target}} </td>
+        <td>{{item.Stoploss}}</td>
+        <td>{{ getpl(item.Quantity,item.LastTradedPrice,item.LTP)}}</td>
+        <td>
+          <a (click)="clear(i)">Exit</a>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7"></td>
+        <td> Total:
+          <b>{{exttotal}}</b>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>

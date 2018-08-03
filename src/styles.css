@@ -52,3 +52,17 @@ app-orderbook {
   width: 100%;
   margin-top: 50px;
 }
+.col{
+  width: 105px;
+}
+.table{
+  table-layout: fixed;
+}
+.colbutton{
+  width:165px;
+}
+.colbutton button{
+  margin-right: 5px;
+ 
+  min-width: 50px;
+}

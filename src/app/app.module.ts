@@ -12,11 +12,30 @@ import { OrderbookComponent } from './orderbook/orderbook.component';
 import { ChartComponent } from './chart/chart.component';
 import { ShContextMenuModule } from 'ng2-right-click-menu';
 import { DialogBuySellComponent } from './dialog-buy-sell/dialog-buy-sell.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { OrdersComponent } from './orders/orders.component';
 
+const appRoutes: Routes = [
+	{
+		path: 'home',
+		component: HomeComponent,
+	},
+	{
+		path: 'chart/:id',
+		component: ChartComponent
+	},
+	{
+		path: '',
+		redirectTo: '/home',
+		pathMatch: 'full'
+	}
+];
 @NgModule({
-	declarations: [ AppComponent, SidebarComponent, HeaderComponent, OrderbookComponent, ChartComponent, DialogBuySellComponent ],
+	declarations: [ AppComponent, SidebarComponent, HeaderComponent, OrderbookComponent, ChartComponent, DialogBuySellComponent, HomeComponent, OrdersComponent ],
 	imports: [
 		BrowserModule,
+		RouterModule.forRoot(appRoutes),
 		BrowserAnimationsModule,
 		FormsModule,
 		ReactiveFormsModule,

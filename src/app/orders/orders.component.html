@@ -1,0 +1,23 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <th>Product</th>
+      <th>Name</th>
+      <th>Qty</th>
+      <th>Buy Price</th>
+       <th>LTP</th>
+    <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of shared.limitBook">
+        <td>{{item.TradeType}}</td>
+        <td>{{item.CompanyKey}}</td>
+        <td>{{item.Quantity}}</td>
+        <td>{{item.LimitPrice}}</td>
+        <td>{{item.LastTradedPrice}}</td>
+        <td> <a (click)="modify(item)">Modify</a></td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>
