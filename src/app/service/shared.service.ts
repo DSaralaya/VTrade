@@ -17,14 +17,14 @@ interface Stocks {
 	Action?: string;
 	LimitPrice?: string;
 	LTP?: string;
-	Target?:string;
-	Stoploss?:string;
+	Target?: string;
+	Stoploss?: string;
 }
 
 @Injectable({
 	providedIn: 'root'
 })
-export class SharedService  {
+export class SharedService {
 	Stocks: Stocks[] = [
 		{
 			CompanyKey: 'ASHOKLEY',
@@ -59,22 +59,20 @@ export class SharedService  {
 	];
 	selectedSymbol = '';
 	orderBook = [];
-	exitedBook=[];
-	limitBook=[];
+	exitedBook = [];
+	limitBook = [];
 	constructor() {
-		if (localStorage.getItem("orderBook")) {
-			this.orderBook=JSON.parse(localStorage.getItem("orderBook"));
+		if (localStorage.getItem('orderBook')) {
+			this.orderBook = JSON.parse(localStorage.getItem('orderBook'));
 		}
-		if (localStorage.getItem("stockList")) {
-			this.Stocks=JSON.parse(localStorage.getItem("stockList"));
+		if (localStorage.getItem('stockList')) {
+			this.Stocks = JSON.parse(localStorage.getItem('stockList'));
 		}
-		if (localStorage.getItem("limitBook")) {
-			this.limitBook=JSON.parse(localStorage.getItem("limitBook"));
+		if (localStorage.getItem('limitBook')) {
+			this.limitBook = JSON.parse(localStorage.getItem('limitBook'));
 		}
-		if (localStorage.getItem("exitedBook")) {
-			this.exitedBook=JSON.parse(localStorage.getItem("exitedBook"));
+		if (localStorage.getItem('exitedBook')) {
+			this.exitedBook = JSON.parse(localStorage.getItem('exitedBook'));
 		}
 	}
-
-
 }

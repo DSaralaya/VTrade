@@ -22,24 +22,24 @@ export class DialogBuySellComponent {
 	tradeTypes = [ 'MIS', 'CNC' ];
 	tradeOption = [ 'BO', 'CO' ];
 	order: any = {};
-	constructor(private _myService:SharedService, public dialogRef: MatDialogRef<SidebarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private shared: SharedService) {}
+	constructor(private _myService: SharedService, public dialogRef: MatDialogRef<SidebarComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private shared: SharedService) {}
 
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
 	buyClick(): void {
-		if(this.data['LimitPrice']==this.data['LastTradedPrice']) {
+		if (this.data['LimitPrice'] == this.data['LastTradedPrice']) {
 			this.shared.orderBook.push(this.data);
 		} else {
-			var data=this.data;
-			var fil=this.shared.limitBook.filter(function(t){
-                   return t['CompanyKey']==data['CompanyKey'];
+			var data = this.data;
+			var fil = this.shared.limitBook.filter(function(t) {
+				return t['CompanyKey'] == data['CompanyKey'];
 			});
-			if(fil.length==0){
+			if (fil.length == 0) {
 				this.shared.limitBook.push(this.data);
 			} else {
-				fil[0]=this.data;
-				localStorage.setItem("limitBook", JSON.stringify(this._myService.limitBook));
+				fil[0] = this.data;
+				localStorage.setItem('limitBook', JSON.stringify(this._myService.limitBook));
 			}
 		}
 		this.dialogRef.close();

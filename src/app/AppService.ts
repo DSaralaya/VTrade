@@ -11,12 +11,14 @@ export class AppService {
 	}
 
 	search_word(term) {
-		return this.http.get(this.url + term).map((res) => {
-			var result = JSON.parse(res['_body']).items;
-			return result.map((item) => {
-				return item.name + ':' + item.symbol.split('.')[0];
+		if (term != '') {
+			return this.http.get(this.url + term).map((res) => {
+				var result = JSON.parse(res['_body']).items;
+				return result.map((item) => {
+					return item.name + ':' + item.symbol.split('.')[0];
+				});
 			});
-		});
+		}
 	}
 
 	get_quote() {
@@ -33,54 +35,53 @@ export class AppService {
 
 	watchlist_quote() {
 		var lst = '';
-		if(this._myService.Stocks.length>0){
-		for (let item of this._myService.Stocks) {
-			lst += '|' + item.CompanyKey;
-		}
-		this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
-			var result = JSON.parse(res['_body'])[1];
+		if (this._myService.Stocks.length > 0) {
 			for (let item of this._myService.Stocks) {
-				var fil = result.filter(function(t) {
-					return t['CompanyKey'] == item.CompanyKey;
-				});
-				if (fil.length > 0) {
-					item = this.AssginQuotes(item, fil[0]);
-				}
+				lst += '|' + item.CompanyKey;
 			}
-			localStorage.setItem("stockList", JSON.stringify(this._myService.Stocks));
-		});
-	}
+			this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
+				var result = JSON.parse(res['_body'])[1];
+				for (let item of this._myService.Stocks) {
+					var fil = result.filter(function(t) {
+						return t['CompanyKey'] == item.CompanyKey;
+					});
+					if (fil.length > 0) {
+						item = this.AssginQuotes(item, fil[0]);
+					}
+				}
+				localStorage.setItem('stockList', JSON.stringify(this._myService.Stocks));
+			});
+		}
 	}
 
 	orderbook_quote() {
 		var lst = '';
-		var count=0;
-		if(this._myService.orderBook.length>0){
-		for (let item of this._myService.orderBook) {
-			lst += '|' + item.CompanyKey;
-		}
-		this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
-			var result = JSON.parse(res['_body'])[1];
+		var count = 0;
+		if (this._myService.orderBook.length > 0) {
 			for (let item of this._myService.orderBook) {
-				var fil = result.filter(function(t) {
-					return t['CompanyKey'] == item.CompanyKey;
-				});
-				if (fil.length > 0) {
-					item = this.AssginQuotes(item, fil[0]);
-				}
-				if(!isNaN(parseFloat(item['Target']))&& !isNaN(parseFloat(item['LastTradedPrice'])) && (parseFloat(item['Target']) <= parseFloat(item['LastTradedPrice']) && parseFloat(item['Stoploss']) >= parseFloat(item['LastTradedPrice']))) {
-					item['LTP']=fil[0]['LastTradedPrice'];
-					this._myService.exitedBook.push(item);
-					this._myService.orderBook.splice(count, 1);
-					localStorage.setItem("exitedBook", JSON.stringify(this._myService.exitedBook));
-				}
-				count++;
+				lst += '|' + item.CompanyKey;
 			}
-			localStorage.setItem("orderBook", JSON.stringify(this._myService.orderBook));
-		});
+			this.http.get('http://portfolio.rediff.com/company-status?company-list=' + lst).subscribe((res) => {
+				var result = JSON.parse(res['_body'])[1];
+				for (let item of this._myService.orderBook) {
+					var fil = result.filter(function(t) {
+						return t['CompanyKey'] == item.CompanyKey;
+					});
+					if (fil.length > 0) {
+						item = this.AssginQuotes(item, fil[0]);
+					}
+					if (!isNaN(parseFloat(item['Target'])) && !isNaN(parseFloat(item['LastTradedPrice'])) && (parseFloat(item['Target']) <= parseFloat(item['LastTradedPrice']) || parseFloat(item['Stoploss']) >= parseFloat(item['LastTradedPrice']))) {
+						item['LTP'] = fil[0]['LastTradedPrice'];
+						this._myService.exitedBook.push(item);
+						this._myService.orderBook.splice(count, 1);
+						localStorage.setItem('exitedBook', JSON.stringify(this._myService.exitedBook));
+					}
+					count++;
+				}
+				localStorage.setItem('orderBook', JSON.stringify(this._myService.orderBook));
+			});
 		}
 	}
-
 
 	order_quote() {
 		var lst = '';
@@ -93,22 +94,21 @@ export class AppService {
 				var result = JSON.parse(res['_body'])[1];
 
 				for (let item of this._myService.limitBook) {
-					var fil = result.filter(function (t) {
+					var fil = result.filter(function(t) {
 						return t['CompanyKey'] == item.CompanyKey;
 					});
 					if (fil.length > 0) {
 						item = this.AssginQuotes(item, fil[0]);
 					}
-					if (parseFloat(item['LimitPrice']) == parseFloat(item['LastTradedPrice']) || (item.Action=='Buy' &&  parseFloat(item['LimitPrice'])> parseFloat(item['LastTradedPrice'])) || (item.Action=='Sell' &&  parseFloat(item['LimitPrice'])< parseFloat(item['LastTradedPrice']))) {
-						debugger;
-						item['LTP']=fil[0]['LastTradedPrice'];
+					if (parseFloat(item['LimitPrice']) == parseFloat(item['LastTradedPrice']) || (item.Action == 'Buy' && parseFloat(item['LimitPrice']) > parseFloat(item['LastTradedPrice'])) || (item.Action == 'Sell' && parseFloat(item['LimitPrice']) < parseFloat(item['LastTradedPrice']))) {
+						item['LTP'] = fil[0]['LastTradedPrice'];
 						this._myService.orderBook.push(item);
 						this._myService.limitBook.splice(count, 1);
-						localStorage.setItem("orderBook", JSON.stringify(this._myService.orderBook));
-					} 
+						localStorage.setItem('orderBook', JSON.stringify(this._myService.orderBook));
+					}
 					count++;
 				}
-				localStorage.setItem("limitBook", JSON.stringify(this._myService.limitBook));
+				localStorage.setItem('limitBook', JSON.stringify(this._myService.limitBook));
 			});
 		}
 	}

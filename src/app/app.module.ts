@@ -19,7 +19,7 @@ import { OrdersComponent } from './orders/orders.component';
 const appRoutes: Routes = [
 	{
 		path: 'home',
-		component: HomeComponent,
+		component: HomeComponent
 	},
 	{
 		path: 'chart/:id',

@@ -5,8 +5,8 @@
       <th>Name</th>
       <th>Qty</th>
       <th>Buy Price</th>
-       <th>LTP</th>
-    <th></th>
+      <th>LTP</th>
+      <th></th>
     </thead>
     <tbody>
       <tr *ngFor="let item of shared.limitBook">
@@ -15,9 +15,11 @@
         <td>{{item.Quantity}}</td>
         <td>{{item.LimitPrice}}</td>
         <td>{{item.LastTradedPrice}}</td>
-        <td> <a (click)="modify(item)">Modify</a></td>
+        <td>
+          <a (click)="modify(item)">Modify</a>
+        </td>
       </tr>
     </tbody>
-    
+
   </table>
 </div>

@@ -14,23 +14,20 @@ import { AppService } from '../AppService';
 })
 export class SidebarComponent implements OnInit {
 	items = [ { label: 'Buy' }, { label: 'Sell' } ];
-	constructor(public appService:AppService, public _myService: SharedService, private chart: ChartComponent, public dialog: MatDialog) {
-        
-	}
+	constructor(public appService: AppService, public _myService: SharedService, private chart: ChartComponent, public dialog: MatDialog) {}
 
-	ngOnInit(){
-		interval(30000).subscribe(x => {
-		this.appService.watchlist_quote();
-	  });
+	ngOnInit() {
+		interval(30000).subscribe((x) => {
+			this.appService.watchlist_quote();
+		});
 	}
 
 	selectSymbol(item) {
-		
 		//this.chart.loadchart(item['CompanyKey']);
 	}
 	remove(index) {
-		 console.log(index);
-		 this._myService.Stocks.splice(index, 1);
+		console.log(index);
+		this._myService.Stocks.splice(index, 1);
 	}
 
 	onClick(action, stock) {
