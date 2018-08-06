@@ -9,14 +9,14 @@
       <th></th>
     </thead>
     <tbody>
-      <tr *ngFor="let item of shared.limitBook">
+      <tr *ngFor="let item of shared.limitBook;let i = index">
         <td>{{item.TradeType}}</td>
         <td>{{item.CompanyKey}}</td>
         <td>{{item.Quantity}}</td>
         <td>{{item.LimitPrice}}</td>
         <td>{{item.LastTradedPrice}}</td>
         <td>
-          <a (click)="modify(item)">Modify</a>
+          <a (click)="modify(item)">Modify</a> |   <a (click)="clear(i)">Exit</a>
         </td>
       </tr>
     </tbody>

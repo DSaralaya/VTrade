@@ -69,3 +69,28 @@ app-orderbook {
   margin-right: 5px;
   min-width: 50px;
 }
+
+.mat-list .mat-list-item .mat-list-text>*{
+  font-size: 12px!important;
+ 
+}
+.mat-list .mat-list-item {
+  margin-left: -25px!important;
+}
+.mat-list-item-content{
+  min-width: 220px;
+}
+.plus{
+  color: green;
+  margin-left: 10px;
+}
+.minus{
+  color: red;
+  margin-left: 10px;
+}
+a:hover {
+  cursor: pointer;
+}
+a {
+  text-decoration: underline!important;
+}

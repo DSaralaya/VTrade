@@ -14,10 +14,11 @@ export class OrderbookComponent implements OnInit {
 	constructor(public appService: AppService, private shared: SharedService) {}
 
 	ngOnInit() {
-		interval(30000).subscribe((x) => {
+		interval(15000).subscribe((x) => {
 			this.appService.orderbook_quote();
 			setTimeout(() => {
 				this.gettotal();
+				this.extgettotal();
 			}, 400);
 			var d = new Date();
 			var m = d.getMinutes();
@@ -33,13 +34,15 @@ export class OrderbookComponent implements OnInit {
 					this.shared.orderBook = this.shared.orderBook.filter(function(t) {
 						return t.TradeType != 'MIS';
 					});
-
+					this.shared.limitBook=[];
+					localStorage.setItem('limitBook','');
 					localStorage.setItem('exitedBook', JSON.stringify(this.shared.exitedBook));
 					localStorage.setItem('orderBook', JSON.stringify(this.shared.orderBook));
 				}
 			}
 		});
 		this.gettotal();
+		this.extgettotal();
 	}
 	gettotal() {
 		this.total = 0;
@@ -50,7 +53,7 @@ export class OrderbookComponent implements OnInit {
 	extgettotal() {
 		this.exttotal = 0;
 		this.shared.exitedBook.forEach((element) => {
-			this.exttotal += parseFloat(this.getpl(element.Quantity, element.LastTradedPrice, element.LTP));
+			this.exttotal += parseFloat(this.getpl(element.Quantity, element.LastTradedPrice, element.LimitPrice));
 		});
 	}
 

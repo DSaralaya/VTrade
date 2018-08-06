@@ -24,4 +24,8 @@ export class OrdersComponent implements OnInit {
 			data: stock
 		});
 	}
+	clear(index){
+		this.shared.limitBook.splice(index, 1);
+		localStorage.setItem('limitBook', JSON.stringify(this.shared.limitBook));
+	}
 }

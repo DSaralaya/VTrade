@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
 		interval(30000).subscribe((x) => {
 			this.appService.watchlist_quote();
 		});
+		
 	}
 
 	selectSymbol(item) {
@@ -32,8 +33,8 @@ export class SidebarComponent implements OnInit {
 
 	onClick(action, stock) {
 		stock.Action = action;
-		stock.LimitPrice = stock.LastTradedPrice;
-		stock.LTP = stock.LastTradedPrice;
+		stock.LimitPrice = stock.LastTradedPrice.replace(',','');
+		stock.LTP = stock.LastTradedPrice.replace(',','');
 		let dialogRef = this.dialog.open(DialogBuySellComponent, {
 			width: '600px',
 			data: stock
